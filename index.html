@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -323,6 +322,9 @@
     <div class="title-block">
       <div class="amount">$2,700</div>
       <div class="subtitle">Saving Challenge</div>
+      <div style="margin-top: 8px; color: #FFD700; font-size: 14px; font-weight: 900;">
+        MAR 14 — APR 12
+      </div>
     </div>
     <div class="calendar">
       <div class="cal-top">
@@ -355,8 +357,6 @@
     <div class="saved-sub" id="remaining">$2,700 restants</div>
   </div>
 </div>
-
-<!-- Win banner -->
 
 <div class="win-banner" id="win-banner">
   <div class="win-emoji">🎉</div>
@@ -430,13 +430,12 @@ amounts.forEach((amount, i) => {
 
 updateStats();
 </script>
-  <script>
+<script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js');
   }
 </script>
 <link rel="manifest" href="manifest.json">
-
 
 </body>
 </html>
