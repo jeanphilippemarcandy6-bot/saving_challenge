@@ -28,311 +28,94 @@
     padding: 24px 20px 20px;
     width: 100%;
     max-width: 400px;
-    box-shadow:
-      0 0 0 3px rgba(255,220,80,0.4),
-      0 0 40px rgba(20,50,160,0.8),
-      0 20px 60px rgba(0,0,0,0.6);
+    box-shadow: 0 0 0 3px rgba(255,220,80,0.4), 0 0 40px rgba(20,50,160,0.8), 0 20px 60px rgba(0,0,0,0.6);
     position: relative;
     overflow: hidden;
   }
 
-  /* Stars bg */
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='2' fill='white' opacity='0.15'/%3E%3Ccircle cx='80' cy='50' r='1.5' fill='white' opacity='0.1'/%3E%3Ccircle cx='150' cy='30' r='2' fill='white' opacity='0.12'/%3E%3Ccircle cx='60' cy='100' r='1' fill='white' opacity='0.08'/%3E%3Ccircle cx='180' cy='90' r='2.5' fill='white' opacity='0.1'/%3E%3Ccircle cx='40' cy='160' r='1.5' fill='white' opacity='0.12'/%3E%3Ccircle cx='120' cy='140' r='2' fill='white' opacity='0.08'/%3E%3C/svg%3E");
-    pointer-events: none;
-  }
-
-  /* Header */
   .header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     position: relative;
     z-index: 1;
   }
 
-  .amount {
-    font-family: 'Playfair Display', serif;
-    font-size: 40px;
-    color: #FFD700;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 20px rgba(255,200,0,0.3);
-    line-height: 1;
+  .amount { font-size: 40px; color: #FFD700; text-shadow: 0 2px 8px rgba(0,0,0,0.4); line-height: 1; }
+  .subtitle { font-size: 14px; font-weight: 900; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* New Discipline Dashboard */
+  .discipline-tracker {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
   }
 
-  .subtitle {
-    font-size: 14px;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  .status-line { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .status-dot { width: 12px; height: 12px; border-radius: 50%; transition: 0.3s; }
+  .dot-red { background: #ff4444; box-shadow: 0 0 10px #ff4444; }
+  .dot-green { background: #44cc44; box-shadow: 0 0 10px #44cc44; }
+  
+  .status-text { font-size: 13px; font-weight: 800; color: white; font-family: sans-serif; }
+  .missed-days { font-size: 11px; color: #ff9999; font-weight: bold; font-family: sans-serif; text-transform: uppercase; }
 
   .calendar {
-    background: white;
-    border-radius: 12px;
-    border: 3px solid #e0e0e0;
-    width: 64px;
-    height: 64px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    flex-shrink: 0;
+    background: white; border-radius: 12px; border: 3px solid #e0e0e0;
+    width: 64px; height: 64px; display: flex; flex-direction: column; overflow: hidden;
   }
-
-  .cal-top {
-    background: #e63946;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
+  .cal-top { background: #e63946; height: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .cal-dot { width: 5px; height: 5px; background: #8B0000; border-radius: 50%; }
+  .cal-num { font-size: 28px; color: #1a2a7f; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center; }
 
-  .cal-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    color: #1a2a7f;
-    text-align: center;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  /* Grid & Progress Styles remain the same */
+  .progress-wrap { margin-bottom: 14px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: rgba(255,255,255,0.8); margin-bottom: 6px; }
+  .progress-bar-bg { background: rgba(0,0,0,0.3); border-radius: 50px; height: 10px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #44cc44, #FFD700); border-radius: 50px; transition: width 0.4s ease; }
 
-  /* Progress bar */
-  .progress-wrap {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 14px;
-  }
+  .grid-wrapper { background: linear-gradient(160deg, #e8c96a 0%, #d4a832 40%, #c49020 100%); border-radius: 20px; padding: 16px 12px 12px; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin-bottom: 14px; }
+  .cell { border-radius: 10px; padding: 9px 2px; text-align: center; font-size: 15px; color: white; cursor: pointer; border: 2px solid rgba(255,255,255,0.25); position: relative; }
+  .cell.checked { opacity: 0.45; transform: scale(0.95); }
+  .cell.checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 22px; font-weight: 900; }
+  
+  .red { background: linear-gradient(145deg, #ff4444, #cc0000); }
+  .blue { background: linear-gradient(145deg, #3399ff, #1155cc); }
+  .green { background: linear-gradient(145deg, #44cc44, #1a8a1a); }
 
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 800;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 6px;
-  }
+  .total-bar { background: linear-gradient(145deg, #ffe066, #f5c800); border-radius: 50px; padding: 11px 20px; text-align: center; }
+  .total-text { font-size: 22px; color: #1a2a7f; }
 
-  .progress-bar-bg {
-    background: rgba(0,0,0,0.3);
-    border-radius: 50px;
-    height: 10px;
-    overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #44cc44, #FFD700);
-    border-radius: 50px;
-    transition: width 0.4s ease;
-  }
-
-  /* Grid area */
-  .grid-wrapper {
-    background: linear-gradient(160deg, #e8c96a 0%, #d4a832 40%, #c49020 100%);
-    border-radius: 20px;
-    padding: 16px 12px 12px;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 1;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 7px;
-    margin-bottom: 14px;
-  }
-
-  .cell {
-    border-radius: 10px;
-    padding: 9px 2px;
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    cursor: pointer;
-    transition: transform 0.15s, filter 0.15s, opacity 0.2s;
-    border: 2px solid rgba(255,255,255,0.25);
-    user-select: none;
-    position: relative;
-    -webkit-user-select: none;
-  }
-
-  .cell:active { transform: scale(0.93); }
-
-  /* Colors */
-  .red {
-    background: linear-gradient(145deg, #ff4444, #cc0000);
-    box-shadow: 0 3px 0 #8b0000, 0 4px 8px rgba(0,0,0,0.3);
-  }
-  .blue {
-    background: linear-gradient(145deg, #3399ff, #1155cc);
-    box-shadow: 0 3px 0 #0033aa, 0 4px 8px rgba(0,0,0,0.3);
-  }
-  .green {
-    background: linear-gradient(145deg, #44cc44, #1a8a1a);
-    box-shadow: 0 3px 0 #0d5c0d, 0 4px 8px rgba(0,0,0,0.3);
-  }
-
-  /* Checked state */
-  .cell.checked {
-    opacity: 0.45;
-    transform: scale(0.95);
-    box-shadow: none !important;
-  }
-
-  .cell.checked::after {
-    content: '✓';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 22px;
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    color: white;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-  }
-
-  /* Total bar */
-  .total-bar {
-    background: linear-gradient(145deg, #ffe066, #f5c800);
-    border-radius: 50px;
-    padding: 11px 20px;
-    text-align: center;
-    box-shadow: 0 3px 0 #c49000, 0 5px 15px rgba(0,0,0,0.2);
-    border: 2px solid rgba(255,255,255,0.4);
-  }
-
-  .total-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: #1a2a7f;
-    letter-spacing: 1px;
-  }
-
-  /* Saved so far */
-  .saved-info {
-    text-align: center;
-    margin-top: 14px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .saved-amount {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: #FFD700;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-  }
-
-  .saved-sub {
-    font-size: 11px;
-    font-weight: 800;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  /* Confetti */
-  .confetti {
-    position: absolute;
-    width: 7px; height: 7px;
-    border-radius: 2px;
-    opacity: 0.7;
-    animation: float 3s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(180deg); }
-  }
-
-  /* Pop animation */
-  @keyframes pop {
-    0% { transform: scale(1); }
-    40% { transform: scale(0.85); }
-    70% { transform: scale(1.05); }
-    100% { transform: scale(0.95); }
-  }
-
-  .cell.pop-anim { animation: pop 0.3s ease forwards; }
-
-  /* Win banner */
-  .win-banner {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .win-banner.show { display: flex; }
-  .win-emoji { font-size: 80px; animation: float 1s ease-in-out infinite; }
-  .win-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    color: #FFD700;
-    text-shadow: 0 0 30px rgba(255,200,0,0.8);
-    margin-top: 16px;
-    text-align: center;
-  }
-  .win-sub {
-    font-size: 16px;
-    font-weight: 800;
-    color: white;
-    margin-top: 8px;
-  }
-  .win-close {
-    margin-top: 24px;
-    background: #FFD700;
-    color: #1a2a7f;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 32px;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    cursor: pointer;
-  }
+  .saved-info { text-align: center; margin-top: 14px; }
+  .saved-amount { font-size: 18px; color: #FFD700; }
 </style>
-
 </head>
 <body>
 
 <div class="card">
-  <div class="confetti" style="top:12%;left:4%;background:#ff6b6b;animation-delay:0s;"></div>
-  <div class="confetti" style="top:7%;left:84%;background:#ffd700;animation-delay:0.5s;"></div>
-  <div class="confetti" style="top:22%;left:91%;background:#4ecdc4;animation-delay:1s;"></div>
-  <div class="confetti" style="top:72%;left:2%;background:#a8e063;animation-delay:1.5s;"></div>
-  <div class="confetti" style="top:80%;left:91%;background:#f7971e;animation-delay:0.8s;"></div>
-
   <div class="header">
     <div class="title-block">
       <div class="amount">$2,700</div>
       <div class="subtitle">Saving Challenge</div>
-      <div style="margin-top: 8px; color: #FFD700; font-size: 14px; font-weight: 900;">
-        MAR 14 — APR 12
-      </div>
+      <div style="margin-top: 5px; color: #FFD700; font-size: 14px; font-weight: 900;">MAR 14 — APR 12</div>
     </div>
     <div class="calendar">
-      <div class="cal-top">
-        <div class="cal-dot"></div>
-        <div class="cal-dot"></div>
-      </div>
+      <div class="cal-top"><div class="cal-dot"></div><div class="cal-dot"></div></div>
       <div class="cal-num">30</div>
     </div>
+  </div>
+
+  <div class="discipline-tracker">
+    <div class="status-line">
+      <div id="status-dot" class="status-dot dot-red"></div>
+      <div id="status-msg" class="status-text">Pas encore payé aujourd'hui</div>
+    </div>
+    <div id="missed-count" class="missed-days">Jours manqués : 0</div>
   </div>
 
   <div class="progress-wrap">
@@ -346,96 +129,87 @@
   </div>
 
   <div class="grid-wrapper">
-    <div class="grid" id="grid"></div>
-    <div class="total-bar">
-      <div class="total-text">TOTAL: $2,700</div>
-    </div>
+    <div id="grid" class="grid"></div>
+    <div class="total-bar"><div class="total-text">TOTAL: $2,700</div></div>
   </div>
 
   <div class="saved-info">
-    <div class="saved-amount" id="saved-amount">$0 économisés</div>
-    <div class="saved-sub" id="remaining">$2,700 restants</div>
+    <div id="saved-amount" class="saved-amount">$0 économisés</div>
   </div>
 </div>
 
-<div class="win-banner" id="win-banner">
-  <div class="win-emoji">🎉</div>
-  <div class="win-text">FÉLICITATIONS !</div>
-  <div class="win-sub">Tu as économisé $2,700 ! 🏆</div>
-  <button class="win-close" onclick="document.getElementById('win-banner').classList.remove('show')">Super !</button>
-</div>
-
 <script>
-const amounts = [
-  80, 75, 95, 105, 60,
-  110, 85, 60, 140, 55,
-  85, 125, 60, 100, 110,
-  45, 100, 80, 85, 90,
-  65, 135, 55, 95, 105,
-  50, 145, 95, 85, 125
-];
-
+const amounts = [80,75,95,105,60,110,85,60,140,55,85,125,60,100,110,45,100,80,85,90,65,135,55,95,105,50,145,95,85,125];
 const STORAGE_KEY = 'saving_challenge_2700';
+const HISTORY_KEY = 'saving_history_dates';
+const START_DATE = new Date('2026-03-14');
 
-// Load saved state
 let checked = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-if (checked.length !== amounts.length) {
-  checked = new Array(amounts.length).fill(false);
-}
+if (checked.length !== amounts.length) checked = new Array(amounts.length).fill(false);
 
-const grid = document.getElementById('grid');
-
-function getColor(amount) {
-  if (amount >= 100) return 'red';
-  if (amount <= 50) return 'green';
-  return 'blue';
-}
+let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
 
 function updateStats() {
   const done = checked.filter(Boolean).length;
   const savedTotal = amounts.reduce((sum, a, i) => checked[i] ? sum + a : sum, 0);
-  const remaining = 2700 - savedTotal;
   const pct = Math.round((done / 30) * 100);
 
   document.getElementById('days-done').textContent = `${done} / 30 jours`;
   document.getElementById('pct').textContent = `${pct}%`;
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('saved-amount').textContent = `$${savedTotal} économisés`;
-  document.getElementById('remaining').textContent = remaining > 0 ? `$${remaining} restants` : '🎉 Objectif atteint !';
 
-  if (done === 30) {
-    setTimeout(() => document.getElementById('win-banner').classList.add('show'), 400);
+  // Gestion de la discipline
+  const today = new Date().toDateString();
+  const dot = document.getElementById('status-dot');
+  const msg = document.getElementById('status-msg');
+  
+  if (history.includes(today)) {
+    dot.className = "status-dot dot-green";
+    msg.textContent = "Payé aujourd'hui ! Bravoir.";
+  } else {
+    dot.className = "status-dot dot-red";
+    msg.textContent = "N'oublie pas de payer aujourd'hui !";
   }
 
+  // Calcul des jours manqués
+  const now = new Date();
+  let missed = 0;
+  for (let d = new Date(START_DATE); d <= now; d.setDate(d.getDate() + 1)) {
+    if (!history.includes(d.toDateString())) missed++;
+  }
+  document.getElementById('missed-count').textContent = `Jours manqués : ${missed}`;
+
   localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
 }
 
+const grid = document.getElementById('grid');
 amounts.forEach((amount, i) => {
   const cell = document.createElement('div');
-  cell.className = `cell ${getColor(amount)}`;
+  cell.className = `cell ${amount >= 100 ? 'red' : (amount <= 50 ? 'green' : 'blue')}`;
   if (checked[i]) cell.classList.add('checked');
-  cell.dataset.index = i;
   cell.textContent = `$${amount}`;
 
   cell.addEventListener('click', () => {
+    const today = new Date().toDateString();
     checked[i] = !checked[i];
-    cell.classList.toggle('checked', checked[i]);
-    cell.classList.add('pop-anim');
-    setTimeout(() => cell.classList.remove('pop-anim'), 350);
+    
+    if (checked[i]) {
+      if (!history.includes(today)) history.push(today);
+    } else {
+      // Si on décoche, on retire la date seulement si c'était la dernière case du jour
+      // (Optionnel : pour rester simple, on garde l'historique si une action a été faite)
+    }
+    
+    cell.classList.toggle('checked');
     updateStats();
   });
-
   grid.appendChild(cell);
 });
 
 updateStats();
 </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-  }
-</script>
-<link rel="manifest" href="manifest.json">
 
 </body>
 </html>
