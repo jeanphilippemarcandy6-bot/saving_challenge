@@ -2,190 +2,165 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>$2,700 Saving Challenge</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(ellipse at 30% 20%, #1a3a8f 0%, #0d1f5c 40%, #060d2e 100%);
-    padding: 20px 16px;
-    font-family: 'Playfair Display', serif;
-  }
-  .card {
-    background: radial-gradient(ellipse at 50% 30%, #2a5bd7 0%, #1432a0 40%, #0a1a6e 100%);
-    border-radius: 28px;
-    padding: 24px 20px 20px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 0 0 3px rgba(255,220,80,0.4), 0 0 40px rgba(20,50,160,0.8), 0 20px 60px rgba(0,0,0,0.6);
-    position: relative;
-    z-index: 1;
-  }
-  .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
-  .amount { font-size: 40px; color: #FFD700; text-shadow: 0 2px 8px rgba(0,0,0,0.4); line-height: 1; }
-  .subtitle { font-size: 14px; font-weight: 900; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
-  
-  .discipline-tracker {
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .status-line { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .status-dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot-red { background: #ff4444; box-shadow: 0 0 10px #ff4444; }
-  .dot-green { background: #44cc44; box-shadow: 0 0 10px #44cc44; }
-  .status-text { font-size: 13px; font-weight: 800; color: white; font-family: sans-serif; }
-  .missed-days { font-size: 11px; color: #ff9999; font-weight: bold; font-family: sans-serif; text-transform: uppercase; }
+body {
+  background:#0d1f5c;
+  color:white;
+  font-family:sans-serif;
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
 
-  .calendar {
-    background: white; border-radius: 12px; border: 3px solid #e0e0e0;
-    width: 64px; height: 64px; display: flex; flex-direction: column; overflow: hidden;
-  }
-  .cal-top { background: #e63946; height: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .cal-dot { width: 5px; height: 5px; background: #8B0000; border-radius: 50%; }
-  .cal-num { font-size: 28px; color: #1a2a7f; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center; }
+.card { max-width:400px; width:100%; }
 
-  .progress-wrap { margin-bottom: 14px; }
-  .progress-label { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: rgba(255,255,255,0.8); margin-bottom: 6px; }
-  .progress-bar-bg { background: rgba(0,0,0,0.3); border-radius: 50px; height: 10px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #44cc44, #FFD700); border-radius: 50px; transition: width 0.4s ease; }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin:20px 0;
+}
 
-  .grid-wrapper { background: linear-gradient(160deg, #e8c96a 0%, #d4a832 40%, #c49020 100%); border-radius: 20px; padding: 16px 12px 12px; }
-  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin-bottom: 14px; }
-  .cell { border-radius: 10px; padding: 9px 2px; text-align: center; font-size: 15px; color: white; cursor: pointer; border: 2px solid rgba(255,255,255,0.25); position: relative; }
-  .cell.checked { opacity: 0.45; transform: scale(0.95); }
-  .cell.checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 22px; font-weight: 900; }
-  
-  .red { background: linear-gradient(145deg, #ff4444, #cc0000); }
-  .blue { background: linear-gradient(145deg, #3399ff, #1155cc); }
-  .green { background: linear-gradient(145deg, #44cc44, #1a8a1a); }
+.cell {
+  padding:10px;
+  text-align:center;
+  border-radius:10px;
+  background:#3399ff;
+  cursor:pointer;
+}
 
-  .total-bar { background: linear-gradient(145deg, #ffe066, #f5c800); border-radius: 50px; padding: 11px 20px; text-align: center; }
-  .total-text { font-size: 22px; color: #1a2a7f; }
-  .saved-amount { text-align: center; margin-top: 14px; font-size: 18px; color: #FFD700; }
+.cell.checked {
+  opacity:0.4;
+  position:relative;
+}
+
+.cell.checked::after {
+  content:"✓";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:20px;
+}
+
+.red { background:#ff4444; }
+.green { background:#44cc44; }
+
+.progress {
+  height:10px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.fill {
+  height:100%;
+  background:#44cc44;
+  width:0%;
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="card">
-  <div class="header">
-    <div class="title-block">
-      <div class="amount">$2,700</div>
-      <div class="subtitle">Saving Challenge</div>
-      <div style="margin-top: 5px; color: #FFD700; font-size: 14px; font-weight: 900;">MAR 14 — APR 12</div>
-    </div>
-    <div class="calendar">
-      <div class="cal-top"><div class="cal-dot"></div><div class="cal-dot"></div></div>
-      <div class="cal-num">30</div>
-    </div>
-  </div>
 
-  <div class="discipline-tracker">
-    <div class="status-line">
-      <div id="status-dot" class="status-dot"></div>
-      <div id="status-msg" class="status-text">Chargement...</div>
-    </div>
-    <div id="missed-count" class="missed-days">JOURS MANQUÉS : 0</div>
-  </div>
+<h2>$2,700 Saving Challenge</h2>
 
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span id="days-done">0 / 30 jours</span>
-      <span id="pct">0%</span>
-    </div>
-    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
-  </div>
+<div id="status"></div>
+<div id="missed"></div>
 
-  <div class="grid-wrapper">
-    <div id="grid" class="grid"></div>
-    <div class="total-bar"><div class="total-text">TOTAL: $2,700</div></div>
-  </div>
-  <div id="saved-amount" class="saved-amount">$0 économisés</div>
+<div id="days"></div>
+
+<div class="progress">
+  <div id="fill" class="fill"></div>
+</div>
+
+<div id="grid" class="grid"></div>
+
+<div id="total"></div>
+
 </div>
 
 <script>
+
+// ===== CONFIG =====
 const amounts = [80,75,95,105,60,110,85,60,140,55,85,125,60,100,110,45,100,80,85,90,65,135,55,95,105,50,145,95,85,125];
-const STORAGE_KEY = 'saving_challenge_2700';
-const LAST_CLICK_KEY = 'last_click_date';
 const START_DATE = new Date('2026-03-14');
+const KEY = 'challenge';
 
-let checked = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-if (checked.length !== amounts.length) checked = new Array(amounts.length).fill(false);
+// ===== DATA =====
+let checked = JSON.parse(localStorage.getItem(KEY)) || new Array(30).fill(false);
 
-function updateStats() {
-  const done = checked.filter(Boolean).length;
-  const savedTotal = amounts.reduce((sum, a, i) => checked[i] ? sum + a : sum, 0);
-  const pct = Math.round((done / 30) * 100);
-
-  document.getElementById('days-done').textContent = `${done} / 30 jours`;
-  document.getElementById('pct').textContent = `${pct}%`;
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('saved-amount').textContent = `$${savedTotal} économisés`;
-
-  // --- LOGIQUE DISCIPLINE CORRIGÉE ---
-  const todayStr = new Date().toDateString();
-  const lastClick = localStorage.getItem(LAST_CLICK_KEY);
-  const dot = document.getElementById('status-dot');
-  const msg = document.getElementById('status-msg');
-
-  if (lastClick === todayStr) {
-    dot.className = "status-dot dot-green";
-    msg.textContent = "Payé aujourd'hui ! Bravo.";
-  } else {
-    dot.className = "status-dot dot-red";
-    msg.textContent = "N'oublie pas de payer aujourd'hui !";
-  }
-
-  // --- CALCUL JOURS MANQUÉS CORRIGÉ ---
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const start = new Date(START_DATE);
-  start.setHours(0,0,0,0);
-  
-  const diffTime = today - start;
-  const daysElapsed = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 car le 14 compte
-  
-  // Si tu as coché 10 cases mais qu'on est au jour 12, tu as 2 jours manqués.
-  // Si tu as coché 12 cases au jour 12, tu as 0 jours manqués.
-  let missed = daysElapsed - done;
-  if (missed < 0) missed = 0; // Au cas où tu es en avance !
-
-  document.getElementById('missed-count').textContent = `JOURS MANQUÉS : ${missed}`;
-
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
-}
-
+// ===== GRID =====
 const grid = document.getElementById('grid');
-amounts.forEach((amount, i) => {
-  const cell = document.createElement('div');
-  cell.className = `cell ${amount >= 100 ? 'red' : (amount <= 50 ? 'green' : 'blue')}`;
-  if (checked[i]) cell.classList.add('checked');
-  cell.textContent = `$${amount}`;
 
-  cell.addEventListener('click', () => {
+amounts.forEach((amt,i)=>{
+  const div = document.createElement('div');
+  div.className = 'cell ' + (amt>=100?'red':amt<=50?'green':'');
+  div.textContent = "$"+amt;
+
+  if(checked[i]) div.classList.add('checked');
+
+  div.onclick = ()=>{
     checked[i] = !checked[i];
-    cell.classList.toggle('checked');
-    
-    // On enregistre qu'on a cliqué aujourd'hui
-    localStorage.setItem(LAST_CLICK_KEY, new Date().toDateString());
-    
-    updateStats();
-  });
-  grid.appendChild(cell);
+    div.classList.toggle('checked');
+    update();
+  };
+
+  grid.appendChild(div);
 });
 
-updateStats();
+// ===== UPDATE =====
+function update(){
+
+  const done = checked.filter(x=>x).length;
+
+  // jours écoulés
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  const start = new Date(START_DATE);
+  start.setHours(0,0,0,0);
+
+  let daysElapsed = Math.floor((today - start)/(1000*60*60*24)) + 1;
+
+  if(daysElapsed < 0) daysElapsed = 0;
+  if(daysElapsed > 30) daysElapsed = 30;
+
+  // ===== LOGIQUE PRINCIPALE =====
+  let missed = daysElapsed - done;
+  if(missed < 0) missed = 0;
+
+  // ===== STATUS =====
+  if(done >= daysElapsed){
+    document.getElementById('status').textContent = "✅ Payé aujourd'hui ! Bravo.";
+  } else {
+    document.getElementById('status').textContent = "❌ Tu as du retard.";
+  }
+
+  document.getElementById('missed').textContent = "JOURS MANQUÉS : " + missed;
+
+  // ===== PROGRESS =====
+  document.getElementById('days').textContent = done + " / 30 jours";
+
+  const pct = Math.round((done/30)*100);
+  document.getElementById('fill').style.width = pct+"%";
+
+  // ===== TOTAL =====
+  const total = amounts.reduce((s,a,i)=> checked[i]?s+a:s,0);
+  document.getElementById('total').textContent = "$"+total+" économisés";
+
+  localStorage.setItem(KEY, JSON.stringify(checked));
+}
+
+update();
+
 </script>
+
 </body>
 </html>
