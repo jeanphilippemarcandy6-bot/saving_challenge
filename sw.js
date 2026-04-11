@@ -1,8 +1,15 @@
-const CACHE_NAME = 'savings-v1';
-const assets = ['./', './index.html', './manifest.json'];
+const CACHE = 'saving-v2';
+const FILES = ['/', '/index.html'];
+
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assets)));
+  e.waitUntil(
+    caches.open(CACHE).then(cache => cache.addAll(FILES))
+  );
 });
+
 self.addEventListener('fetch', e => {
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request))
+  );
 });
+
