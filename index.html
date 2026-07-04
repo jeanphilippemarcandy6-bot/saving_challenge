@@ -156,8 +156,8 @@ const amounts = [
   75, 85, 95, 105, 115, 125, 135, 145, 150, 150
 ];
 
-const STORAGE_KEY = 'saving_challenge_8500_fixed';
-// Date forcée et verrouillée au 1er Juillet 2026
+// Changement de clé pour ignorer l'ancienne mémoire bloquée de l'iPhone
+const STORAGE_KEY = 'saving_challenge_8500_fixed_v3';
 const startDate = '2026-07-01'; 
 
 let checked = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
