@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Saving Challenge</title>
+<title>Marc-Andy - Saving Challenge</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
@@ -95,7 +95,7 @@
 
   <div class="header">
     <div class="title-block">
-      <div class="amount">MON DÉFI</div>
+      <div class="amount">Marc-Andy</div>
       <div class="subtitle">Saving Challenge</div>
       <div class="date-range" id="date-range">JUL 01 — OCT 08</div>
     </div>
@@ -136,7 +136,7 @@
 <div class="win-banner" id="win-banner">
   <div class="win-emoji">🎉</div>
   <div class="win-text">FÉLICITATIONS !</div>
-  <div class="win-sub">Tu as terminé ton défi de 100 jours ! 🏆</div>
+  <div class="win-sub">Tu as terminé ton défi de 100 jours, Marc-Andy ! 🏆</div>
   <div class="win-actions">
     <button class="win-close" onclick="document.getElementById('win-banner').classList.remove('show')">Fermer</button>
   </div>
@@ -156,7 +156,7 @@ const amounts = [
   75, 85, 95, 105, 115, 125, 135, 145, 150, 150
 ];
 
-const STORAGE_KEY = 'saving_challenge_fixed_v4';
+const STORAGE_KEY = 'saving_challenge_marcandy_v5';
 const startDate = '2026-07-01'; 
 
 let checked = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
