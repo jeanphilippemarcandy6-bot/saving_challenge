@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>$8,500 Saving Challenge</title>
+<title>Saving Challenge</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
@@ -36,9 +36,9 @@
     pointer-events: none;
   }
   .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; position: relative; z-index: 1; }
-  .amount { font-size: 42px; font-weight: 900; color: #FFD700; text-shadow: 0 2px 8px rgba(0,0,0,0.4); line-height: 1; }
-  .subtitle { font-size: 14px; font-weight: 900; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
-  .date-range { font-size: 13px; font-weight: 900; color: #FFD700; letter-spacing: 1px; margin-top: 3px; }
+  .amount { font-size: 38px; font-weight: 900; color: #FFD700; text-shadow: 0 2px 8px rgba(0,0,0,0.4); line-height: 1.1; text-transform: uppercase; }
+  .subtitle { font-size: 14px; font-weight: 900; color: #fff; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .date-range { font-size: 13px; font-weight: 900; color: #FFD700; letter-spacing: 1px; margin-top: 5px; }
   .calendar { background: white; border-radius: 12px; border: 3px solid #e0e0e0; width: 70px; height: 70px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.3); flex-shrink: 0; }
   .cal-top { background: #e63946; height: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .cal-dot { width: 6px; height: 6px; background: #8B0000; border-radius: 50%; }
@@ -95,7 +95,7 @@
 
   <div class="header">
     <div class="title-block">
-      <div class="amount">$8,500</div>
+      <div class="amount">MON DÉFI</div>
       <div class="subtitle">Saving Challenge</div>
       <div class="date-range" id="date-range">JUL 01 — OCT 08</div>
     </div>
@@ -136,7 +136,7 @@
 <div class="win-banner" id="win-banner">
   <div class="win-emoji">🎉</div>
   <div class="win-text">FÉLICITATIONS !</div>
-  <div class="win-sub">Tu as économisé $8,500 ! 🏆</div>
+  <div class="win-sub">Tu as terminé ton défi de 100 jours ! 🏆</div>
   <div class="win-actions">
     <button class="win-close" onclick="document.getElementById('win-banner').classList.remove('show')">Fermer</button>
   </div>
@@ -156,8 +156,7 @@ const amounts = [
   75, 85, 95, 105, 115, 125, 135, 145, 150, 150
 ];
 
-// Changement de clé pour ignorer l'ancienne mémoire bloquée de l'iPhone
-const STORAGE_KEY = 'saving_challenge_8500_fixed_v3';
+const STORAGE_KEY = 'saving_challenge_fixed_v4';
 const startDate = '2026-07-01'; 
 
 let checked = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
