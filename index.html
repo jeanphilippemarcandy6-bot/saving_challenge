@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>$2,700 Saving Challenge</title>
+<title>$8,500 Saving Challenge</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
@@ -23,7 +23,7 @@
     border-radius: 28px;
     padding: 24px 20px 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 440px;
     box-shadow: 0 0 0 3px rgba(255,220,80,0.4), 0 0 40px rgba(20,50,160,0.8), 0 20px 60px rgba(0,0,0,0.6);
     position: relative;
     overflow: hidden;
@@ -42,7 +42,7 @@
   .calendar { background: white; border-radius: 12px; border: 3px solid #e0e0e0; width: 70px; height: 70px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.3); flex-shrink: 0; }
   .cal-top { background: #e63946; height: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .cal-dot { width: 6px; height: 6px; background: #8B0000; border-radius: 50%; }
-  .cal-num { font-size: 30px; font-weight: 900; color: #1a2a7f; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .cal-num { font-size: 26px; font-weight: 900; color: #1a2a7f; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center; }
   .discipline-tracker { background: rgba(0,0,0,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 1; }
   .status-line { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
   .status-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
@@ -54,15 +54,19 @@
   .progress-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 800; color: rgba(255,255,255,0.85); margin-bottom: 6px; }
   .progress-bar-bg { background: rgba(0,0,0,0.3); border-radius: 50px; height: 10px; overflow: hidden; }
   .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #44cc44, #FFD700); border-radius: 50px; transition: width 0.4s ease; }
-  .grid-wrapper { background: linear-gradient(160deg, #e8c96a 0%, #d4a832 40%, #c49020 100%); border-radius: 20px; padding: 16px 12px 12px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.3); position: relative; z-index: 1; }
-  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 14px; }
-  .cell { border-radius: 10px; padding: 10px 4px; text-align: center; font-size: 15px; font-weight: 700; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.4); cursor: pointer; transition: transform 0.15s, opacity 0.2s; border: 2px solid rgba(255,255,255,0.25); user-select: none; position: relative; -webkit-user-select: none; }
+  .grid-wrapper { background: linear-gradient(160deg, #e8c96a 0%, #d4a832 40%, #c49020 100%); border-radius: 20px; padding: 14px 10px 10px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.3); position: relative; z-index: 1; }
+  
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 14px; max-height: 380px; overflow-y: auto; padding-right: 2px; }
+  .grid::-webkit-scrollbar { width: 4px; }
+  .grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
+
+  .cell { border-radius: 8px; padding: 8px 2px; text-align: center; font-size: 13px; font-weight: 700; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.4); cursor: pointer; transition: transform 0.15s, opacity 0.2s; border: 1.5px solid rgba(255,255,255,0.25); user-select: none; position: relative; -webkit-user-select: none; }
   .cell:active { transform: scale(0.92); }
-  .red { background: linear-gradient(145deg, #ff4444, #cc0000); box-shadow: 0 3px 0 #8b0000, 0 4px 8px rgba(0,0,0,0.3); }
-  .blue { background: linear-gradient(145deg, #3399ff, #1155cc); box-shadow: 0 3px 0 #0033aa, 0 4px 8px rgba(0,0,0,0.3); }
-  .green { background: linear-gradient(145deg, #44cc44, #1a8a1a); box-shadow: 0 3px 0 #0d5c0d, 0 4px 8px rgba(0,0,0,0.3); }
-  .cell.checked { opacity: 0.4; transform: scale(0.94); box-shadow: none !important; }
-  .cell.checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 22px; font-weight: 900; color: white; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+  .red { background: linear-gradient(145deg, #ff4444, #cc0000); box-shadow: 0 2px 0 #8b0000, 0 3px 6px rgba(0,0,0,0.3); }
+  .blue { background: linear-gradient(145deg, #3399ff, #1155cc); box-shadow: 0 2px 0 #0033aa, 0 3px 6px rgba(0,0,0,0.3); }
+  .green { background: linear-gradient(145deg, #44cc44, #1a8a1a); box-shadow: 0 2px 0 #0d5c0d, 0 3px 6px rgba(0,0,0,0.3); }
+  .cell.checked { opacity: 0.3; transform: scale(0.94); box-shadow: none !important; }
+  .cell.checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; font-weight: 900; color: white; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
   .total-bar { background: linear-gradient(145deg, #ffe066, #f5c800); border-radius: 50px; padding: 11px 20px; text-align: center; box-shadow: 0 3px 0 #c49000, 0 5px 15px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.4); }
   .total-text { font-size: 22px; font-weight: 900; color: #1a2a7f; letter-spacing: 1px; }
   .saved-info { text-align: center; margin-top: 14px; position: relative; z-index: 1; }
@@ -72,11 +76,9 @@
   @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(0.85); } 70% { transform: scale(1.05); } 100% { transform: scale(0.94); } }
   .cell.pop-anim { animation: pop 0.3s ease forwards; }
 
-  /* Reset button */
   .reset-btn { display: block; margin: 14px auto 0; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); border-radius: 50px; padding: 8px 20px; font-size: 12px; font-weight: 800; cursor: pointer; position: relative; z-index: 1; letter-spacing: 1px; }
   .reset-btn:active { background: rgba(255,255,255,0.2); }
 
-  /* Modal nouveau mois */
   .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 998; align-items: center; justify-content: center; }
   .modal.show { display: flex; }
   .modal-box { background: linear-gradient(145deg, #1432a0, #0a1a6e); border-radius: 24px; padding: 28px 24px; width: 90%; max-width: 340px; box-shadow: 0 0 0 2px rgba(255,220,80,0.3), 0 20px 60px rgba(0,0,0,0.6); }
@@ -88,7 +90,6 @@
   .modal-btn { width: 100%; background: linear-gradient(145deg, #ffe066, #f5c800); border: none; border-radius: 50px; padding: 13px; font-size: 16px; font-weight: 900; color: #1a2a7f; cursor: pointer; }
   .modal-cancel { display: block; text-align: center; margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.5); cursor: pointer; }
 
-  /* Win banner */
   .win-banner { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; flex-direction: column; }
   .win-banner.show { display: flex; }
   .win-emoji { font-size: 80px; animation: float 1s ease-in-out infinite; }
@@ -109,13 +110,13 @@
 
   <div class="header">
     <div class="title-block">
-      <div class="amount">$2,700</div>
+      <div class="amount">$8,500</div>
       <div class="subtitle">Saving Challenge</div>
-      <div class="date-range" id="date-range">MAR 14 — APR 12</div>
+      <div class="date-range" id="date-range">MAR 14 — JUN 22</div>
     </div>
     <div class="calendar">
       <div class="cal-top"><div class="cal-dot"></div><div class="cal-dot"></div></div>
-      <div class="cal-num">30</div>
+      <div class="cal-num">100</div>
     </div>
   </div>
 
@@ -129,7 +130,7 @@
 
   <div class="progress-wrap">
     <div class="progress-label">
-      <span id="days-done">0 / 30 jours</span>
+      <span id="days-done">0 / 100 jours</span>
       <span id="pct">0%</span>
     </div>
     <div class="progress-bar-bg">
@@ -139,21 +140,20 @@
 
   <div class="grid-wrapper">
     <div class="grid" id="grid"></div>
-    <div class="total-bar"><div class="total-text">TOTAL: $2,700</div></div>
+    <div class="total-bar"><div class="total-text">TOTAL: $8,500</div></div>
   </div>
 
   <div class="saved-info">
     <div class="saved-amount" id="saved-amount">$0 économisés</div>
   </div>
 
-  <button class="reset-btn" onclick="document.getElementById('modal').classList.add('show')">🔄 NOUVEAU MOIS</button>
+  <button class="reset-btn" onclick="document.getElementById('modal').classList.add('show')">🔄 NOUVEAU DÉFI</button>
 </div>
 
-<!-- Modal nouveau mois -->
 <div class="modal" id="modal">
   <div class="modal-box">
-    <div class="modal-title">🗓️ Nouveau mois</div>
-    <div class="modal-sub">Entre la date de début du nouveau challenge</div>
+    <div class="modal-title">🗓️ Nouveau Défi</div>
+    <div class="modal-sub">Entre la date de début du challenge de 100 jours</div>
     <div class="modal-label">Date de début</div>
     <input type="date" class="modal-input" id="new-start-date">
     <button class="modal-btn" onclick="startNewMonth()">Recommencer !</button>
@@ -161,21 +161,33 @@
   </div>
 </div>
 
-<!-- Win banner -->
 <div class="win-banner" id="win-banner">
   <div class="win-emoji">🎉</div>
   <div class="win-text">FÉLICITATIONS !</div>
-  <div class="win-sub">Tu as économisé $2,700 ! 🏆</div>
+  <div class="win-sub">Tu as économisé $8,500 ! 🏆</div>
   <div class="win-actions">
     <button class="win-close" onclick="document.getElementById('win-banner').classList.remove('show')">Fermer</button>
-    <button class="win-restart" onclick="document.getElementById('win-banner').classList.remove('show'); document.getElementById('modal').classList.add('show')">Nouveau mois 🔄</button>
+    <button class="win-restart" onclick="document.getElementById('win-banner').classList.remove('show'); document.getElementById('modal').classList.add('show')">Nouveau défi 🔄</button>
   </div>
 </div>
 
 <script>
-const amounts = [80,75,95,105,60,110,85,60,140,55,85,125,60,100,110,45,100,80,85,90,65,135,55,95,105,50,145,95,85,125];
-const STORAGE_KEY = 'saving_challenge_2700';
-const START_KEY = 'saving_start_date';
+// 100 montants diversifiés (min $30) pour un total exact de $8,500
+const amounts = [
+  30, 35, 40, 45, 50, 55, 60, 65, 70, 75,
+  35, 45, 55, 65, 75, 85, 95, 105, 115, 125,
+  40, 50, 60, 70, 80, 90, 100, 110, 120, 130,
+  45, 55, 65, 75, 85, 95, 105, 115, 125, 135,
+  50, 60, 70, 80, 90, 100, 110, 120, 130, 140,
+  55, 65, 75, 85, 95, 105, 115, 125, 135, 145,
+  60, 70, 80, 90, 100, 110, 120, 130, 140, 150,
+  65, 75, 85, 95, 105, 115, 125, 135, 145, 150,
+  70, 80, 90, 100, 110, 120, 130, 140, 150, 150,
+  75, 85, 95, 105, 115, 125, 135, 145, 150, 150
+];
+
+const STORAGE_KEY = 'saving_challenge_8500';
+const START_KEY = 'saving_start_date_100_v2';
 
 let checked = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 if (checked.length !== amounts.length) checked = new Array(amounts.length).fill(false);
@@ -186,7 +198,7 @@ function formatDate(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
   const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   const end = new Date(d);
-  end.setDate(end.getDate() + 29);
+  end.setDate(end.getDate() + 99);
   return `${months[d.getMonth()]} ${d.getDate()} — ${months[end.getMonth()]} ${end.getDate()}`;
 }
 
@@ -196,18 +208,18 @@ function getDaysElapsed() {
   const start = new Date(startDate + 'T00:00:00');
   start.setHours(0,0,0,0);
   const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24)) + 1;
-  return Math.min(Math.max(diff, 0), 30);
+  return Math.min(Math.max(diff, 0), 100);
 }
 
 function updateStats() {
   const done = checked.filter(Boolean).length;
   const savedTotal = amounts.reduce((sum, a, i) => checked[i] ? sum + a : sum, 0);
-  const pct = Math.round((done / 30) * 100);
+  const pct = Math.round((done / 100) * 100);
   const daysElapsed = getDaysElapsed();
   const missed = Math.max(0, daysElapsed - done);
 
   document.getElementById('date-range').textContent = formatDate(startDate);
-  document.getElementById('days-done').textContent = `${done} / 30 jours`;
+  document.getElementById('days-done').textContent = `${done} / 100 jours`;
   document.getElementById('pct').textContent = `${pct}%`;
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('saved-amount').textContent = `$${savedTotal} économisés`;
@@ -217,13 +229,13 @@ function updateStats() {
   const msg = document.getElementById('status-msg');
   if (done >= daysElapsed) {
     dot.className = 'status-dot dot-green';
-    msg.textContent = "Payé aujourd'hui ! Bravo.";
+    msg.textContent = "À jour pour aujourd'hui ! Bravo.";
   } else {
     dot.className = 'status-dot dot-red';
     msg.textContent = `${daysElapsed - done} paiement${daysElapsed - done > 1 ? 's' : ''} en attente`;
   }
 
-  if (done === 30) {
+  if (done === 100) {
     setTimeout(() => document.getElementById('win-banner').classList.add('show'), 400);
   }
 
@@ -245,7 +257,8 @@ function startNewMonth() {
 const grid = document.getElementById('grid');
 amounts.forEach((amount, i) => {
   const cell = document.createElement('div');
-  cell.className = `cell ${amount >= 100 ? 'red' : amount <= 50 ? 'green' : 'blue'}`;
+  // Vert si <= 55, Rouge si >= 110, sinon Bleu
+  cell.className = `cell ${amount >= 110 ? 'red' : amount <= 55 ? 'green' : 'blue'}`;
   if (checked[i]) cell.classList.add('checked');
   cell.textContent = `$${amount}`;
   cell.addEventListener('click', () => {
@@ -266,5 +279,4 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
-
-
+ 
