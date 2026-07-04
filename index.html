@@ -140,7 +140,8 @@
 
   <div class="grid-wrapper">
     <div class="grid" id="grid"></div>
-    <div class="total-bar"><div class="total-text">TOTAL: $8,500</div></div>
+    <!-- Changement de l'ID ici pour cibler le texte de la barre centrale -->
+    <div class="total-bar"><div class="total-text" id="total-bar-text">ÉCONOMISÉ: $0</div></div>
   </div>
 
   <div class="saved-info">
@@ -172,7 +173,6 @@
 </div>
 
 <script>
-// 100 montants diversifiés (min $30) pour un total exact de $8,500
 const amounts = [
   30, 35, 40, 45, 50, 55, 60, 65, 70, 75,
   35, 45, 55, 65, 75, 85, 95, 105, 115, 125,
@@ -224,6 +224,9 @@ function updateStats() {
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('saved-amount').textContent = `$${savedTotal} économisés`;
   document.getElementById('missed-count').textContent = `JOURS MANQUÉS : ${missed}`;
+  
+  // Met à jour la barre centrale avec l'argent économisé au lieu du total fixe
+  document.getElementById('total-bar-text').textContent = `ÉCONOMISÉ: $${savedTotal}`;
 
   const dot = document.getElementById('status-dot');
   const msg = document.getElementById('status-msg');
@@ -257,8 +260,15 @@ function startNewMonth() {
 const grid = document.getElementById('grid');
 amounts.forEach((amount, i) => {
   const cell = document.createElement('div');
-  // Vert si <= 55, Rouge si >= 110, sinon Bleu
-  cell.className = `cell ${amount >= 110 ? 'red' : amount <= 55 ? 'green' : 'blue'}`;
+  
+  if (amount >= 30 && amount <= 50) {
+    cell.className = 'cell green';
+  } else if (amount >= 55 && amount <= 95) {
+    cell.className = 'cell blue';
+  } else if (amount >= 100 && amount <= 150) {
+    cell.className = 'cell red';
+  }
+
   if (checked[i]) cell.classList.add('checked');
   cell.textContent = `$${amount}`;
   cell.addEventListener('click', () => {
@@ -279,4 +289,3 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
- 
